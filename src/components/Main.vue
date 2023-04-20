@@ -1,19 +1,32 @@
 <template>
     <div class="container">
         <div class="jumbotron mt-5">
-            <h1 class="display-4">Fast Typing Test</h1>
+            <h1 class="display-4">Fast Typing</h1>
             <p class="lead">{{description}}</p>
-            <div>
-                <span class="badge bg-success fs-6">True: {{ trueCount }}</span>
-                <span class="badge bg-danger ms-2 fs-6">False: {{ falseCount }}</span>
+            <div v-if="!isFinish">
+                <span class="fs-6">True: {{ trueCount }}</span>
+                <span class="ms-2 fs-6">False: {{ falseCount }}</span>
             </div>
             <hr class="my-4">
-            <span v-for="(word,key) in words" :key="key" v-bind:class="key!=0 || writingWordControl"
-                class="ms-1 p-2 fs-4">{{ word }}</span>
-            <div class="input-group input-group-lg mt-4">
-                <input type="text" class="form-control" v-model="writingWord">
-                <button class="btn btn-outline-secondary" type="button" disabled>1:00</button>
-                <button class="btn btn-primary" type="button">Refresh</button>
+            <div class="alert alert-success" v-if="isFinish">
+                <h4>Finish</h4>
+                <p>Congratulations! The correct and incorrect information is as follows.</p>
+                <div>
+                    <span class="badge bg-success fs-6">True: {{ trueCount }}</span>
+                    <span class="badge bg-danger ms-2 fs-6">False: {{ falseCount }}</span>
+
+                </div>
+                    <button class="btn btn-outline-success mt-4" type="button">Try again</button>
+            </div>
+            <div v-else>
+                <span v-for="(word,key) in words" :key="key" v-bind:class="key!=0 || writingWordControl"
+                    class="ms-1 p-2 fs-4">
+                    {{ word }}
+                </span>
+                <div class="input-group input-group-lg mt-4">
+                    <input type="text" class="form-control" v-model="writingWord">
+                    <button class="btn btn-outline-secondary" type="button" disabled>{{timer}} sec.</button>
+                </div>
             </div>
         </div>
     </div>
@@ -30,11 +43,14 @@
                 trueCount: 0,
                 falseCount: 0,
                 timer: 60,
-                interval: false
+                interval: false,
+                isRunning: false,
+                isFinish: false
             }
         },
         watch: {
             writingWord(value) {
+                if (!this.isRunning) this.toggleTimer()
                 const word = this.words[0].slice(0, value.length)
                 const userWord = value.replace(" ", "")
 
@@ -52,7 +68,19 @@
                 return this.isTrue ? 'writing-word' : 'writing-word bg-danger';
             }
         },
-        methods: {}
+        methods: {
+            toggleTimer() {
+                this.isRunning = true
+                this.interval = setInterval(this.timeProcess, 1000)
+            },
+            timeProcess() {
+                this.timer--
+                if (this.timer === 0) {
+                    clearInterval(this.interval)
+                    this.isFinish = true
+                }
+            }
+        }
     }
 </script>
 
