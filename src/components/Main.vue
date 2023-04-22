@@ -47,7 +47,7 @@
                 isTrue: true,
                 trueCount: 0,
                 falseCount: 0,
-                timer: 10,
+                timer: 60,
                 interval: false,
                 isRunning: false,
                 isFinish: false,
