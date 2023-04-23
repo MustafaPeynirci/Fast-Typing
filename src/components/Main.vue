@@ -10,7 +10,7 @@
             <hr class="my-4">
             <div class="alert alert-success" v-if="isFinish">
                 <h4>Finish</h4>
-                <p>Congratulations! The correct and incorrect information is as follows.</p>
+                <p>{{description2}}</p>
                 <div>
                     <p class="display-6">Correct Word Count: {{correctWordCount}}</p>
                     <p>Correct Percentage: %{{correctPercentage}}</p>
@@ -18,8 +18,9 @@
                     <span class="badge bg-danger ms-2 fs-6">False: {{ falseCount }}</span>
 
                 </div>
-                <button class="btn btn-outline-success mt-4" type="button" @click="reloadPage">Try
-                    again</button>
+                <button class="btn btn-outline-success mt-4" type="button" @click="reloadPage">
+                    Try again
+                </button>
             </div>
             <div class="card border-0" v-else>
                 <div class="card-body">
@@ -43,6 +44,7 @@
         data() {
             return {
                 description: "It is an easy and fun 10 finger keyboard training site. When you complete the lessons and exercises as described, you will be able to type with 10 fingers without looking at the keyboard.",
+                description2:"Congratulations! The correct and incorrect information is as follows.",
                 writingWord: null,
                 isTrue: true,
                 trueCount: 0,
