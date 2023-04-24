@@ -37,7 +37,7 @@
         </div>
     </div>
 </template>
-
+//test
 <script>
     import wordList from '@/assets/words.json'
     export default {
