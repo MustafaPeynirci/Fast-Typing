@@ -9,3 +9,21 @@ If you want to increase your typing speed, it's for you.
 ## Result
 
 <img width="1680" alt="fast-typing2" src="https://user-images.githubusercontent.com/87112713/235292632-ad37ab92-d608-4fc2-9564-1e3db7fbfbb3.png">
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
